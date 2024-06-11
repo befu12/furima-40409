@@ -22,9 +22,9 @@
 | -------------- | ---------- | ----------- |
 | user           | references | null: false, foreign_key: true |
 | explanation    | text       | null: false |
-| price          | integer    | null: false |
+| item_name      | string     | null: false |
 | category_id    | integer    | null: false |
-| number         | string     | null: false |
+| price          | integer    | null: false |
 | condition_id   | integer    | null: false |
 | burden_id      | integer    | null: false |
 | prefecture_id  | integer    | null: false |
@@ -43,8 +43,8 @@
 ## orders テーブル
 | Column     | Type    | Option                         |
 | ---------- | --------| ------------------------------ |
-| user       | integer | null: false, foreign_key: true |
-| item       | integer | null: false, foreign_key: true |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -57,7 +57,7 @@
 | -------------- | ---------- | ----------- |
 | order          | references | null: false, foreign_key: true |
 | postal_code    | string     | null: false |
-| prefecture_id | integer    | null: false, foreign_key: true |
+| prefecture_id  | integer    | null: false, foreign_key: true |
 | city           | string     | null: false |
 | house_number   | string     | null: false |
 | building_name  | string     |
