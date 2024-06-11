@@ -21,17 +21,19 @@
 | Column         | Type       | Option      |
 | -------------- | ---------- | ----------- |
 | user           | references | null: false, foreign_key: true |
+| photo          | text       | null: false |
+| explanation    | text       | null: false |
 | name           | string     | null: false |
 | category_id    | integer    | null: false |
 | number         | string     | null: false |
 | condition_id   | integer    | null: false |
 | burden_id      | integer    | null: false |
-| prefectures_id | integer    | null: false |
+| prefecture_id  | integer    | null: false |
 | estimate_id    | integer    | null: false |
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - has_many   :orders
 - has_one_active_hash :category
 - has_one_active_hash :condition
@@ -57,7 +59,7 @@
 | -------------- | ---------- | ----------- |
 | order          | references | null: false, foreign_key: true |
 | postal_code    | string     | null: false |
-| prefectures_id | integer    | null: false, foreign_key: true |
+| prefecture_id | integer    | null: false, foreign_key: true |
 | city           | string     | null: false |
 | house_number   | string     | null: false |
 | building_name  | string     |
@@ -65,5 +67,5 @@
 
 ### Association
 
-- belongs_to             :order
 - belongs_to_active_hash :prefectures
+- belongs_to             :order
