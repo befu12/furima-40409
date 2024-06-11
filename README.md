@@ -21,9 +21,8 @@
 | Column         | Type       | Option      |
 | -------------- | ---------- | ----------- |
 | user           | references | null: false, foreign_key: true |
-| photo          | text       | null: false |
 | explanation    | text       | null: false |
-| name           | string     | null: false |
+| price          | integer    | null: false |
 | category_id    | integer    | null: false |
 | number         | string     | null: false |
 | condition_id   | integer    | null: false |
@@ -34,7 +33,7 @@
 ### Association
 
 - belongs_to :user
-- has_many   :orders
+- has_one   :order
 - has_one_active_hash :category
 - has_one_active_hash :condition
 - has_one_active_hash :burden
@@ -46,7 +45,6 @@
 | ---------- | --------| ------------------------------ |
 | user       | integer | null: false, foreign_key: true |
 | item       | integer | null: false, foreign_key: true |
-| address    | integer | null: false, foreign_key: true |
 
 ### Association
 
