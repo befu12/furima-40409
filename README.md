@@ -1,24 +1,69 @@
-# README
+# テーフル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
+| Column             | Type   | Options    |
+| ------------------ | ------ | ---------- |
+| nickname           | string | null: false |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false |
+| name_first         | string | null: false |
+| name_last          | string | null: false |
+| name_first_reading | string | null: false |
+| name_last_reading  | string | null: false |
+| birthday           | date   | null: false |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+- has_many :items
+- has_many :orders
 
-* System dependencies
+## items テーブル
+| Column         | Type       | Option      |
+| -------------- | ---------- | ----------- |
+| user           | references | null: false, foreign_key: true |
+| explanation    | text       | null: false |
+| item_name      | string     | null: false |
+| category_id    | integer    | null: false |
+| price          | integer    | null: false |
+| condition_id   | integer    | null: false |
+| burden_id      | integer    | null: false |
+| prefecture_id  | integer    | null: false |
+| estimate_id    | integer    | null: false |
 
-* Configuration
+### Association
 
-* Database creation
+- belongs_to :user
+- has_one   :order
+- has_one_active_hash :category
+- has_one_active_hash :condition
+- has_one_active_hash :burden
+- has_one_active_hash :prefectures
+- has_one_active_hash :estimate
 
-* Database initialization
+## orders テーブル
+| Column     | Type    | Option                         |
+| ---------- | --------| ------------------------------ |
+| user       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
 
-* Services (job queues, cache servers, search engines, etc.)
+- belongs_to :user
+- belongs_to :item
+- has_one    :address
 
-* Deployment instructions
+## address テーブル
+| Column         | Type       | Option      |
+| -------------- | ---------- | ----------- |
+| order          | references | null: false, foreign_key: true |
+| postal_code    | string     | null: false |
+| prefecture_id  | integer    | null: false, foreign_key: true |
+| city           | string     | null: false |
+| house_number   | string     | null: false |
+| building_name  | string     |
+| phone_num      | string     | null: false |
 
-* ...
+### Association
+
+- belongs_to_active_hash :prefectures
+- belongs_to             :order
