@@ -35,6 +35,12 @@ class ItemsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end  
   end  
+
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to root_path
+  end
  
   private
 
