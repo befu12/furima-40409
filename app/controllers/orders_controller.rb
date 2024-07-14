@@ -1,6 +1,23 @@
 class OrdersController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
-    @itemorder = ItemOrder.new
+    @item_order = ItemOrder.new
+  end
+
+  def create
+    @item_order = ItemOrder.new(order_params)
+    if @item_order.valid?
+      @item_order.save(params, current_user.id)
+      redirect_to root_path
+    else
+      @item = Item.find(params[:item_id])
+      render :index, status: :unprocessable_entity
+    end
+  end
+  
+  private
+
+  def order_params
+    params.require(:item_order).permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_num).merge(item_id: params[:item_id], user_id: current_user.id)
   end
 end
