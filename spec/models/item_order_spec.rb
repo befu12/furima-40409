@@ -43,6 +43,11 @@ RSpec.describe ItemOrder, type: :model do
         @itemorder.valid?
         expect(@itemorder.errors.full_messages).to include("Phone num is invalid. Include hyphen(-)")
       end  
+      it 'tokenが空では購入できない' do
+        @itemorder.token = nil
+        @itemorder.valid?
+        expect(@itemorder.errors.full_messages).to include("Token can't be blank")
+      end  
     end  
   end  
 end
